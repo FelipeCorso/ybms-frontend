@@ -1,0 +1,14 @@
+<p-tabView (onChange)="onTabChange($event)" [activeIndex]="activeTabView">
+  <p-tabPanel header="Movies">
+    Content 1
+    <ng-container [ngTemplateOutlet]="listItems"></ng-container>
+  </p-tabPanel>
+  <p-tabPanel header="Series">
+    Content 2
+    <ng-container [ngTemplateOutlet]="listItems"></ng-container>
+  </p-tabPanel>
+</p-tabView>
+
+<ng-template #listItems>
+  <list-movies-series [items]="items"></list-movies-series>
+</ng-template>
