@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
+import {MediaType} from "../../core/enums/media-type";
 
 @Component({
   selector: 'home',
@@ -7,6 +8,7 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  mediaType = MediaType;
   data: any = {};
 
   constructor(private activatedRoute: ActivatedRoute) {

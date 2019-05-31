@@ -1,25 +1,37 @@
+html {
+  display: flex;
+  justify-content: center;
+}
+
 /* Global Styles */
 h1 {
   color: #369;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
+
 h2, h3 {
   color: #444;
   font-family: Arial, Helvetica, sans-serif;
   font-weight: lighter;
 }
+
 body {
   margin: 2em;
+  max-width: 1366px;
+  width: 100%;
 }
+
 body, input[text], button {
   color: #888;
   font-family: Cambria, Georgia;
 }
+
 a {
   cursor: pointer;
   cursor: hand;
 }
+
 button {
   font-family: Arial;
   background-color: #eee;
@@ -29,9 +41,11 @@ button {
   cursor: pointer;
   cursor: hand;
 }
+
 button:hover {
   background-color: #cfd8dc;
 }
+
 button:disabled {
   background-color: #eee;
   color: #aaa;
@@ -48,13 +62,16 @@ nav a {
   background-color: #eee;
   border-radius: 4px;
 }
+
 nav a:visited, a:link {
   color: #607D8B;
 }
+
 nav a:hover {
   color: #039be5;
   background-color: #CFD8DC;
 }
+
 nav a.active {
   color: #039be5;
 }

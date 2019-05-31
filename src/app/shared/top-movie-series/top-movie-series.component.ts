@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MovieSerieDto} from "../../core/entities/movie-serie-dto";
 import {Router} from "@angular/router";
+import {SelectedTab} from "../tab-list/tab-list.component";
+import {MediaType} from "../../core/enums/media-type";
 
 @Component({
   selector: 'app-top-movie-series',
@@ -9,6 +11,7 @@ import {Router} from "@angular/router";
 })
 export class TopMovieSeriesComponent implements OnInit {
   @Input() item: MovieSerieDto;
+  @Input() mediaType: MediaType;
 
   constructor(private router: Router) {
   }
@@ -17,7 +20,7 @@ export class TopMovieSeriesComponent implements OnInit {
   }
 
   onClickDetails(): void {
-    this.router.navigate([`details/${this.item.id}`]);
+    this.router.navigate([`details/${this.mediaType}/${this.item.id}`]);
   }
 
 }

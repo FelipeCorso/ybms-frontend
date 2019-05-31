@@ -1,5 +1,5 @@
 import {Injectable, NgModule} from '@angular/core';
-import {Resolve, RouterModule, Routes} from '@angular/router';
+import {ActivatedRouteSnapshot, Resolve, RouterModule, Routes} from '@angular/router';
 
 import {AboutComponent} from "./features/about/about.component";
 import {FavoritesComponent} from "./features/favorites/favorites.component";
@@ -9,7 +9,7 @@ import {forkJoin, Observable} from "rxjs";
 import {MediaType} from "./core/enums/media-type";
 import {map} from "rxjs/operators";
 import {MoviesSeriesDetailsComponent} from "./features/movies-series-details/movies-series-details.component";
-import {MediaTypeDto, MoviesSeriesDto} from "./core/entities/movies-series-dto";
+import {MediaTypeDto} from "./core/entities/movies-series-dto";
 import {FavoritesService} from "./features/favorites/favorites.service";
 
 @Injectable({
@@ -34,11 +34,28 @@ export class MediaTrendingResolver implements Resolve<any> {
   providedIn: 'root'
 })
 export class FavoritesResolver implements Resolve<any> {
-  constructor(private favoritesService: FavoritesService, private mediaService: MediaService) {
+  constructor(private favoritesService: FavoritesService) {
   }
 
   public resolve() {
     return this.favoritesService.getFavorites();
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class MoviesSeriesDetailsResolver implements Resolve<any> {
+  constructor(private mediaService: MediaService) {
+  }
+
+  public resolve(route: ActivatedRouteSnapshot) {
+    switch (route.params.mediaType) {
+      case MediaType.MOVIE:
+        return this.mediaService.getMovieById(route.params.id);
+      case MediaType.SERIE:
+        return this.mediaService.getSeriesById(route.params.id);
+    }
   }
 }
 
@@ -58,7 +75,13 @@ const routes: Routes = [
       favorites: FavoritesResolver
     }
   },
-  {path: 'details/:id', component: MoviesSeriesDetailsComponent},
+  {
+    path: 'details/:mediaType/:id',
+    component: MoviesSeriesDetailsComponent,
+    resolve: {
+      entity: MoviesSeriesDetailsResolver
+    }
+  },
   {path: 'about', component: AboutComponent}
 ];
 
