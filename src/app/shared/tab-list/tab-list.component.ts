@@ -13,7 +13,7 @@ export class TabListComponent implements OnChanges, OnInit {
 
   @Input() data: MoviesSeriesDto;
 
-  activeTabView: number;
+  activeTabView: number = SelectedTab.MOVIES;
   item: MediaTypeDto;
 
   constructor(private mediaService: MediaService, private tabListService: TabListService) {
@@ -24,7 +24,7 @@ export class TabListComponent implements OnChanges, OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.data && changes.data.currentValue && !changes.data.firstChange) {
+    if (changes.data && changes.data.currentValue) {
       this.data = changes.data.currentValue;
       this.updateItems();
     }

@@ -1,1 +1,8 @@
+<ng-template [ngIf]="data?.movies?.results?.length && data?.series?.results?.length">
+  <h2>Top rated!</h2>
+  <div class="ui-g">
+    <app-top-movie-series class="ui-g-6" [item]="data?.movies?.results[0]"></app-top-movie-series>
+    <app-top-movie-series class="ui-g-6" [item]="data?.series?.results[0]"></app-top-movie-series>
+  </div>
+</ng-template>
 <tab-list [data]="data"></tab-list>

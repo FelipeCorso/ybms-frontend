@@ -1,0 +1,4 @@
+<div class="top-movie-series" (click)="onClickDetails()"
+     [style.backgroundImage]="'url(https://image.tmdb.org/t/p/w500' + item.backdrop_path + ')'">
+  <span class="title">{{item.original_title || item.original_name}}</span>
+</div>

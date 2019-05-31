@@ -18,6 +18,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import { FavoriteComponent } from './shared/favorite/favorite.component';
 import {TableModule} from "primeng/table";
 import { MoviesSeriesDetailsComponent } from './features/movies-series-details/movies-series-details.component';
+import { TopMovieSeriesComponent } from './shared/top-movie-series/top-movie-series.component';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { MoviesSeriesDetailsComponent } from './features/movies-series-details/m
     SidebarComponent,
     TabListComponent,
     FavoriteComponent,
-    MoviesSeriesDetailsComponent
+    MoviesSeriesDetailsComponent,
+    TopMovieSeriesComponent
   ],
   bootstrap: [AppComponent]
 })

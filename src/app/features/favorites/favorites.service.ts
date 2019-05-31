@@ -3,6 +3,7 @@ import {MovieSerieDto} from "../../core/entities/movie-serie-dto";
 import {MediaType} from "../../core/enums/media-type";
 import {MediaTypeDto, MoviesSeriesDto} from "../../core/entities/movies-series-dto";
 import {SelectedTab} from "../../shared/tab-list/tab-list.component";
+import {FAVORITES} from "./mock-favorites";
 
 @Injectable({
   providedIn: 'root'
@@ -29,8 +30,11 @@ export class FavoritesService {
     if (ybmsFavorites) {
       return JSON.parse(ybmsFavorites);
     }
-    this.createFavoritesStorage();
-    return this.getFavorites();
+    return this.getDefaultFavorites();
+  }
+
+  getDefaultFavorites(): MoviesSeriesDto {
+    return FAVORITES;
   }
 
   addRemoveItemToFavorites(item: MovieSerieDto, mediaType: MediaType, operation: Operation) {

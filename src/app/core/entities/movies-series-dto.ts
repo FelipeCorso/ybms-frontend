@@ -6,7 +6,7 @@ export interface MoviesSeriesDto {
 }
 
 export interface MediaTypeDto {
-  page: number;
+  page?: number;
   results: MovieSerieDto[];
-  total_results: number;
+  total_results?: number;
 }

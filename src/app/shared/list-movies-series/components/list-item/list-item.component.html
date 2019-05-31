@@ -1,6 +1,6 @@
-<img [src]="'https://image.tmdb.org/t/p/w200' + item.poster_path" alt="">
-<div>
-  <span style="font-size: 14px" (click)="onClickItem()">{{item.original_title || item.original_name}}</span>
+<div (click)="onClickItem()" style="cursor: pointer">
+  <img [src]="'https://image.tmdb.org/t/p/w200' + item.poster_path" alt="">
+  <span style="font-size: 14px; display: block">{{item.original_title || item.original_name}}</span>
 </div>
 <div>
   <app-favorite style="margin-right: 5px" [item]="item"></app-favorite>
