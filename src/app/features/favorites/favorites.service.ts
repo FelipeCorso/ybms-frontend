@@ -30,7 +30,7 @@ export class FavoritesService {
     if (ybmsFavorites) {
       return JSON.parse(ybmsFavorites);
     }
-    return this.getDefaultFavorites();
+    return null;
   }
 
   getDefaultFavorites(): MoviesSeriesDto {

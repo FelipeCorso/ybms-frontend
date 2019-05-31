@@ -34,11 +34,45 @@ export class MediaTrendingResolver implements Resolve<any> {
   providedIn: 'root'
 })
 export class FavoritesResolver implements Resolve<any> {
-  constructor(private favoritesService: FavoritesService) {
+  constructor(private favoritesService: FavoritesService, private mediaService: MediaService) {
   }
 
   public resolve() {
-    return this.favoritesService.getFavorites();
+    const ybmsFavorites = this.favoritesService.getFavorites();
+    if (ybmsFavorites) return ybmsFavorites;
+
+    const ybmsDefaultFavorites = this.favoritesService.getDefaultFavorites();
+
+    const movies = ybmsDefaultFavorites.movies.results.map((defaultFavorite) => {
+      return this.mediaService.getMovieById(defaultFavorite.id);
+    });
+    const series = ybmsDefaultFavorites.series.results.map((defaultFavorite) => {
+      return this.mediaService.getSeriesById(defaultFavorite.id);
+    });
+
+    const moviesObserver = new Observable((observer) => {
+      forkJoin(movies)
+        .subscribe((response) => {
+          observer.next(response);
+          observer.complete();
+        });
+    });
+
+    const seriesObserver = new Observable((observer) => {
+      forkJoin(series)
+        .subscribe((response) => {
+          observer.next(response);
+          observer.complete();
+        });
+    });
+
+    return new Observable((observer) => {
+      forkJoin<any, any>([moviesObserver, seriesObserver])
+        .subscribe(response => {
+          observer.next({movies: {results: response[0]}, series: {results: response[1]}});
+          observer.complete();
+        });
+    });
   }
 }
 
