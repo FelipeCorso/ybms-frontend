@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'home',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  data: any = {};
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private activatedRoute: ActivatedRoute) {
   }
 
+  ngOnInit() {
+    this.activatedRoute.data
+      .subscribe((data: any) => this.onRouteDataChange(data));
+  }
+
+  private onRouteDataChange(data: any) {
+    this.data = data.mediaTrending;
+  }
 }

@@ -19,9 +19,4 @@ export class ListItemComponent implements OnInit {
   onClickItem(): void {
     this.sidebarService.show(this.item);
   }
-
-  onClickFavorite(): void {
-    this.item.favorite = !this.item.favorite;
-  }
-
 }

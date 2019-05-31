@@ -1,11 +1,9 @@
 <div class="ui-g">
   <div class="ui-g-6">
     <img [src]="item.thumbnail" alt="">
-    <button type="button" (click)="onClickItem()">{{item.title}}</button>
+    <button type="button" (click)="onClickItem()">{{item.original_title || item.original_name}}</button>
   </div>
   <div class="ui-g-6">
-    Favorito
-    <i class="fa" (click)="onClickFavorite()"
-       [ngClass]="item.favorite ? 'fa-star' : 'fa-star-o'"></i>
+    <app-favorite [item]="item"></app-favorite>
   </div>
 </div>
