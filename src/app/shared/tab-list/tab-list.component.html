@@ -8,5 +8,8 @@
 </p-tabView>
 
 <ng-template #listItems>
-  <list-movies-series [(items)]="items.results"></list-movies-series>
+  <list-movies-series [(items)]="item.results"></list-movies-series>
+  <p-paginator [rows]="20"
+               [totalRecords]="item.total_results"
+               (onPageChange)="onPageChange($event)"></p-paginator>
 </ng-template>

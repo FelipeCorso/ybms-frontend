@@ -8,4 +8,5 @@ export interface MoviesSeriesDto {
 export interface MediaTypeDto {
   page: number;
   results: MovieSerieDto[];
+  total_results: number;
 }

@@ -1,5 +1,8 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {TabListService} from "./tab-list.service";
+import {MediaTypeDto, MoviesSeriesDto} from "../../core/entities/movies-series-dto";
+import {MediaService} from "../../core/services/media.service";
+import {MediaType} from "../../core/enums/media-type";
 
 @Component({
   selector: 'tab-list',
@@ -8,12 +11,12 @@ import {TabListService} from "./tab-list.service";
 })
 export class TabListComponent implements OnChanges, OnInit {
 
-  @Input() data: any;
+  @Input() data: MoviesSeriesDto;
 
   activeTabView: number;
-  items: any;
+  item: MediaTypeDto;
 
-  constructor(private tabListService: TabListService) {
+  constructor(private mediaService: MediaService, private tabListService: TabListService) {
   }
 
   ngOnInit() {
@@ -33,6 +36,22 @@ export class TabListComponent implements OnChanges, OnInit {
     this.updateItems();
   }
 
+  onPageChange($event): void {
+    const mediaType: MediaType = this.activeTabView === 0 ? MediaType.MOVIE : MediaType.SERIE;
+    this.mediaService.getMediaTrending(mediaType, undefined, $event.page + 1)
+      .subscribe((media: MediaTypeDto) => {
+        switch (mediaType) {
+          case MediaType.MOVIE:
+            this.data.movies = media;
+            break;
+          case MediaType.SERIE:
+            this.data.series = media;
+            break;
+        }
+        this.updateItems();
+      });
+  }
+
   private initTab() {
     this.onTabChange({index: 0});
   }
@@ -40,10 +59,10 @@ export class TabListComponent implements OnChanges, OnInit {
   private updateItems(): void {
     switch (this.activeTabView) {
       case SelectedTab.MOVIES:
-        this.items = this.data.movies;
+        this.item = this.data.movies;
         break;
       case SelectedTab.SERIES:
-        this.items = this.data.series;
+        this.item = this.data.series;
         break;
     }
   }

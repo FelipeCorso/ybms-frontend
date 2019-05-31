@@ -68,7 +68,7 @@ export class FavoritesService {
   }
 
   private createFavoritesStorage(): void {
-    const mediaTypeDto: MediaTypeDto = {page: 1, results: []};
+    const mediaTypeDto: MediaTypeDto = {page: 1, results: [], total_results: 0};
     let ybmsFavorites: MoviesSeriesDto = {movies: mediaTypeDto, series: mediaTypeDto};
     this.setFavorites(ybmsFavorites);
   }

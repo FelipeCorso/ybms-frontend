@@ -17,9 +17,5 @@ export class MediaService {
   getMediaTrending(mediaType: MediaType = MediaType.MOVIE, timeWindow: TimeWindow = TimeWindow.WEEK, page: number = 1) {
     return this.http
       .get(`trending/${mediaType}/${timeWindow}?page=${page}`)
-      // .pipe(map((response: any) => response.data));
   }
-
-//  https://api.themoviedb.org/3/trending/movie/week?api_key=daaab0a5b8afc79e7f7f4555434d862d
-
 }
