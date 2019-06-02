@@ -14,6 +14,7 @@ export class TabListComponent implements OnChanges, OnInit {
   @Input() data: MoviesSeriesDto;
 
   activeTabView: MediaType = MediaType.MOVIE;
+  mediaType = MediaType;
   item: MediaTypeDto;
 
   constructor(private mediaService: MediaService, private tabListService: TabListService) {
@@ -37,7 +38,7 @@ export class TabListComponent implements OnChanges, OnInit {
   }
 
   onPageChange($event): void {
-    ;this.mediaService.getMediaTrending(this.activeTabView, undefined, $event.page + 1)
+    this.mediaService.getMediaTrending(this.activeTabView, undefined, $event.page + 1)
       .subscribe((media: MediaTypeDto) => {
         switch (this.activeTabView) {
           case MediaType.MOVIE:

@@ -1,9 +1,9 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {MovieSerieDto} from "../../core/entities/movie-serie-dto";
-import {MediaType} from "../../core/enums/media-type";
-import {MediaTypeDto, MoviesSeriesDto} from "../../core/entities/movies-series-dto";
-import {SelectedTab} from "../../shared/tab-list/tab-list.component";
-import {FAVORITES} from "./mock-favorites";
+import {MovieSerieDto} from '../../core/entities/movie-serie-dto';
+import {MediaType} from '../../core/enums/media-type';
+import {MediaTypeDto, MoviesSeriesDto} from '../../core/entities/movies-series-dto';
+import {SelectedTab} from '../../shared/tab-list/tab-list.component';
+import {FAVORITES} from './mock-favorites';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class FavoritesService {
   @Output()
   private favoritesChange: EventEmitter<SelectedTab> = new EventEmitter();
 
-  private ybmsFavoritesKey: string = "ybmsFavoritesKey";
+  private ybmsFavoritesKey = 'ybmsFavoritesKey';
 
   constructor() {
   }
@@ -26,7 +26,7 @@ export class FavoritesService {
   }
 
   getFavorites(): MoviesSeriesDto {
-    let ybmsFavorites: string = localStorage.getItem(this.ybmsFavoritesKey);
+    const ybmsFavorites: string = localStorage.getItem(this.ybmsFavoritesKey);
     if (ybmsFavorites) {
       return JSON.parse(ybmsFavorites);
     }
@@ -37,8 +37,12 @@ export class FavoritesService {
     return FAVORITES;
   }
 
-  addRemoveItemToFavorites(item: MovieSerieDto, mediaType: MediaType, operation: Operation) {
+  addRemoveItemToFavorites(item: MovieSerieDto, mediaType: MediaType = MediaType.MOVIE, operation: Operation) {
     let ybmsFavorites: MoviesSeriesDto = this.getFavorites();
+    if (!ybmsFavorites) {
+      this.createFavoritesStorage();
+      ybmsFavorites = this.getFavorites();
+    }
     switch (mediaType) {
       case MediaType.MOVIE:
         this.addRemoveItem(ybmsFavorites.movies.results, operation, item);
@@ -73,7 +77,7 @@ export class FavoritesService {
 
   private createFavoritesStorage(): void {
     const mediaTypeDto: MediaTypeDto = {page: 1, results: [], total_results: 0};
-    let ybmsFavorites: MoviesSeriesDto = {movies: mediaTypeDto, series: mediaTypeDto};
+    const ybmsFavorites: MoviesSeriesDto = {movies: mediaTypeDto, series: mediaTypeDto};
     this.setFavorites(ybmsFavorites);
   }
 }

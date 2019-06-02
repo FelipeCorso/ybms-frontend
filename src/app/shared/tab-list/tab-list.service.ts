@@ -1,5 +1,6 @@
-import {EventEmitter, Injectable, Output} from '@angular/core';
+import {Injectable, Output} from '@angular/core';
 import {MediaType} from "../../core/enums/media-type";
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +8,13 @@ import {MediaType} from "../../core/enums/media-type";
 export class TabListService {
 
   @Output()
-  private tabChange: EventEmitter<MediaType> = new EventEmitter();
+  private tabChange: BehaviorSubject<MediaType> = new BehaviorSubject<MediaType>(MediaType.MOVIE);
 
   constructor() {
   }
 
   change(mediaType: MediaType): void {
-    this.tabChange.emit(mediaType);
+    this.tabChange.next(mediaType);
   }
 
   onChange() {
