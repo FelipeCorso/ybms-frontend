@@ -8,6 +8,8 @@
 </p-tabView>
 
 <ng-template #listItems>
+  <p-dropdown [options]="filters" [(ngModel)]="selectedFilter" placeholder="Filter by"
+              (onChange)="onFilterChange($event)"></p-dropdown>
   <list-movies-series [mediaType]="activeTabView" [(items)]="item.results"></list-movies-series>
   <p-paginator [rows]="20" *ngIf="item?.results?.length"
                [totalRecords]="item?.total_results"

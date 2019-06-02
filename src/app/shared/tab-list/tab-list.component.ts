@@ -3,6 +3,8 @@ import {TabListService} from "./tab-list.service";
 import {MediaTypeDto, MoviesSeriesDto} from "../../core/entities/movies-series-dto";
 import {MediaService} from "../../core/services/media.service";
 import {MediaType} from "../../core/enums/media-type";
+import {SelectItem} from "primeng/api";
+import {MovieSerieDto} from "../../core/entities/movie-serie-dto";
 
 @Component({
   selector: 'tab-list',
@@ -16,11 +18,17 @@ export class TabListComponent implements OnChanges, OnInit {
   activeTabView: MediaType = MediaType.MOVIE;
   mediaType = MediaType;
   item: MediaTypeDto;
+  selectedFilter: SelectItem;
+  filters: SelectItem[];
 
   constructor(private mediaService: MediaService, private tabListService: TabListService) {
   }
 
   ngOnInit() {
+    this.filters = [
+      {label: 'Released date', value: 'release_date'},
+      {label: 'Name', value: 'name'}
+    ];
     this.initTab();
   }
 
@@ -32,9 +40,36 @@ export class TabListComponent implements OnChanges, OnInit {
   }
 
   onTabChange(event: any) {
+    this.selectedFilter = null;
     this.activeTabView = event.index === 0 ? MediaType.MOVIE : MediaType.SERIE;
     this.tabListService.change(this.activeTabView);
     this.updateItems();
+  }
+
+  onFilterChange($event): void {
+    let sortField = $event.value;
+    if (sortField) {
+      if (sortField === 'name') {
+        switch (this.activeTabView) {
+          case MediaType.MOVIE:
+            sortField = 'original_title';
+            break;
+          case MediaType.SERIE:
+            sortField = 'original_name';
+            break;
+        }
+      }
+      this.item.results.sort((a: MovieSerieDto, b: MovieSerieDto) => {
+        let fieldA = a[sortField];
+        let fieldB = b[sortField];
+        if (sortField === 'release_date') {
+          // desc order
+          fieldA = Date.parse(b[sortField]);
+          fieldB = Date.parse(a[sortField]);
+        }
+        return fieldA !== fieldB ? fieldA < fieldB ? -1 : 1 : 0;
+      });
+    }
   }
 
   onPageChange($event): void {

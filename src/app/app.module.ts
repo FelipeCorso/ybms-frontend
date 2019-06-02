@@ -11,7 +11,7 @@ import {ListMoviesSeriesComponent} from './shared/list-movies-series/list-movies
 import {ListItemComponent} from './shared/list-movies-series/components/list-item/list-item.component';
 import {SidebarComponent} from './shared/sidebar/sidebar.component';
 import {TabListComponent} from './shared/tab-list/tab-list.component';
-import {PaginatorModule, SidebarModule, TabViewModule} from 'primeng/primeng';
+import {DropdownModule, PaginatorModule, SidebarModule, TabViewModule} from 'primeng/primeng';
 import {AboutComponent} from './features/about/about.component';
 import {HttpInterceptorModule} from './core/http-interceptors/http-interceptor.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -25,7 +25,7 @@ import {DetailsCastComponent} from './features/movies-series-details/components/
 import {DetailsCastItemComponent} from './features/movies-series-details/components/details-cast/components/details-cast-item/details-cast-item.component';
 import {DetailsTrailersComponent} from './features/movies-series-details/components/details-trailers/details-trailers.component';
 import {DetailsTrailersItemComponent} from './features/movies-series-details/components/details-trailers/components/details-trailers-item/details-trailers-item.component';
-import {SafePipe} from "./shared/pipes/safe.pipe";
+import {SafePipe} from './shared/pipes/safe.pipe';
 
 @NgModule({
   imports: [
@@ -33,6 +33,7 @@ import {SafePipe} from "./shared/pipes/safe.pipe";
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    DropdownModule,
     PaginatorModule,
     TableModule,
     TabViewModule,
