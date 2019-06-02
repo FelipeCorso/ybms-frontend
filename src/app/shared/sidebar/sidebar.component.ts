@@ -25,5 +25,4 @@ export class SidebarComponent implements OnInit {
   onHide(): void {
     this.item = null;
   }
-
 }

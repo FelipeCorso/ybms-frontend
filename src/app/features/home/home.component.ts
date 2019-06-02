@@ -10,6 +10,7 @@ import {MediaType} from "../../core/enums/media-type";
 export class HomeComponent implements OnInit {
   mediaType = MediaType;
   data: any = {};
+  topRated: any = {};
 
   constructor(private activatedRoute: ActivatedRoute) {
   }
@@ -21,5 +22,6 @@ export class HomeComponent implements OnInit {
 
   private onRouteDataChange(data: any) {
     this.data = data.mediaTrending;
+    this.topRated = data.topRated;
   }
 }

@@ -6,9 +6,7 @@
 
   <strong>Description:</strong>
   <p>{{item?.overview | slice:0:130}}...</p>
-  <strong>Time:</strong> {{item?.time}}
-  <br>
-  <strong>Rating:</strong> {{item?.vote_average}}/10
+  <i class="fa fa-star" style="margin-right: 5px"></i>{{item?.vote_average}}
   <br>
   <app-favorite [item]="item"></app-favorite>
 </p-sidebar>

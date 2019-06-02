@@ -1,16 +1,16 @@
 import {Component, Injectable, NgModule} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterModule, Routes} from '@angular/router';
 
-import {AboutComponent} from "./features/about/about.component";
-import {FavoritesComponent} from "./features/favorites/favorites.component";
-import {HomeComponent} from "./features/home/home.component";
-import {MediaService} from "./core/services/media.service";
-import {forkJoin, Observable} from "rxjs";
-import {MediaType} from "./core/enums/media-type";
-import {map} from "rxjs/operators";
-import {MoviesSeriesDetailsComponent} from "./features/movies-series-details/movies-series-details.component";
-import {MediaTypeDto} from "./core/entities/movies-series-dto";
-import {FavoritesService} from "./features/favorites/favorites.service";
+import {AboutComponent} from './features/about/about.component';
+import {FavoritesComponent} from './features/favorites/favorites.component';
+import {HomeComponent} from './features/home/home.component';
+import {MediaService} from './core/services/media.service';
+import {forkJoin, Observable} from 'rxjs';
+import {MediaType} from './core/enums/media-type';
+import {map} from 'rxjs/operators';
+import {MoviesSeriesDetailsComponent} from './features/movies-series-details/movies-series-details.component';
+import {MediaTypeDto} from './core/entities/movies-series-dto';
+import {FavoritesService} from './features/favorites/favorites.service';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,25 @@ export class MediaTrendingResolver implements Resolve<any> {
           return {movies: response[0], series: response[1]};
         }
         return {};
-      }))
+      }));
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TopRatedResolver implements Resolve<any> {
+  constructor(private mediaService: MediaService) {
+  }
+
+  public resolve() {
+    return forkJoin<Observable<MediaTypeDto>, Observable<MediaTypeDto>>([this.mediaService.getTopRated(), this.mediaService.getTopRated(MediaType.SERIE)])
+      .pipe(map(response => {
+        if (response) {
+          return {movies: response[0], series: response[1]};
+        }
+        return {};
+      }));
   }
 }
 
@@ -39,7 +57,9 @@ export class FavoritesResolver implements Resolve<any> {
 
   public resolve() {
     const ybmsFavorites = this.favoritesService.getFavorites();
-    if (ybmsFavorites) return ybmsFavorites;
+    if (ybmsFavorites) {
+      return ybmsFavorites;
+    }
 
     const ybmsDefaultFavorites = this.favoritesService.getDefaultFavorites();
 
@@ -107,7 +127,8 @@ const routes: Routes = [
     path: 'home',
     component: HomeComponent,
     resolve: {
-      mediaTrending: MediaTrendingResolver
+      mediaTrending: MediaTrendingResolver,
+      topRated: TopRatedResolver
     }
   },
   {

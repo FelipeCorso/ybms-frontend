@@ -15,4 +15,10 @@ export class DetailsHomeComponent implements OnInit {
   ngOnInit() {
   }
 
+  getRuntime(): string {
+    if (this.item) {
+      return `${Math.floor(this.item.runtime / 60)}h ${this.item.runtime % 60}m`;
+    }
+    return '';
+  }
 }

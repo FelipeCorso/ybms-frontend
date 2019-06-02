@@ -24,7 +24,6 @@ export class ListItemComponent implements OnInit {
   }
 
   onClickDetails(): void {
-    debugger;
     this.router.navigate([`movies-series/details/${this.mediaType}/${this.item.id}`]);
 
   }

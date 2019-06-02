@@ -10,12 +10,14 @@
 }
 
 .details-rating {
+  direction: rtl;
+  
   .vote-count {
     display: block;
     font-size: 10px;
   }
   .genre {
     font-size: 14px;
-    padding-right: 10px;
+    padding-left: 10px;
   }
 }

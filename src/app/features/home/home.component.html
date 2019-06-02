@@ -1,8 +1,8 @@
 <ng-template [ngIf]="data?.movies?.results?.length && data?.series?.results?.length">
   <h2>Top rated!</h2>
   <div class="ui-g">
-    <app-top-movie-series class="ui-g-6" [mediaType]="mediaType.MOVIE" [item]="data?.movies?.results[0]"></app-top-movie-series>
-    <app-top-movie-series class="ui-g-6" [mediaType]="mediaType.SERIE" [item]="data?.series?.results[0]"></app-top-movie-series>
+    <app-top-movie-series class="ui-g-6" [mediaType]="mediaType.MOVIE" [item]="topRated?.movies?.results[0]"></app-top-movie-series>
+    <app-top-movie-series class="ui-g-6" [mediaType]="mediaType.SERIE" [item]="topRated?.series?.results[0]"></app-top-movie-series>
   </div>
 </ng-template>
 <tab-list [data]="data"></tab-list>
