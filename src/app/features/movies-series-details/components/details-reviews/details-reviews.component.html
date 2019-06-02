@@ -1,0 +1,9 @@
+<ng-container *ngFor="let review of reviews?.results">
+  <div class="review">
+    <strong>{{review.author}}</strong>
+    <p>{{review.content}}</p>
+  </div>
+</ng-container>
+<p-paginator [rows]="20" *ngIf="reviews?.results?.length"
+             [totalRecords]="reviews?.total_results"
+             (onPageChange)="onPageChange($event)"></p-paginator>

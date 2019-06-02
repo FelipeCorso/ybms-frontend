@@ -20,7 +20,7 @@ export class TopMovieSeriesComponent implements OnInit {
   }
 
   onClickDetails(): void {
-    this.router.navigate([`details/${this.mediaType}/${this.item.id}`]);
+    this.router.navigate([`movies-series/details/${this.mediaType}/${this.item.id}`]);
   }
 
 }

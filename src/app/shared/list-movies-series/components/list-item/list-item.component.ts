@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MovieSerieDto} from '../../../../core/entities/movie-serie-dto';
 import {SidebarService} from '../../../sidebar/sidebar.service';
 import {Router} from "@angular/router";
+import {MediaType} from "../../../../core/enums/media-type";
 
 @Component({
   selector: 'list-item',
@@ -10,6 +11,7 @@ import {Router} from "@angular/router";
 })
 export class ListItemComponent implements OnInit {
   @Input() item: MovieSerieDto;
+  @Input() mediaType: MediaType;
 
   constructor(private router: Router, private sidebarService: SidebarService) {
   }
@@ -22,6 +24,8 @@ export class ListItemComponent implements OnInit {
   }
 
   onClickDetails(): void {
-    this.router.navigate([`details/${this.item.id}`]);
+    debugger;
+    this.router.navigate([`movies-series/details/${this.mediaType}/${this.item.id}`]);
+
   }
 }

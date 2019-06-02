@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {SelectedTab} from "./tab-list.component";
+import {MediaType} from "../../core/enums/media-type";
 
 @Injectable({
   providedIn: 'root'
@@ -7,13 +7,13 @@ import {SelectedTab} from "./tab-list.component";
 export class TabListService {
 
   @Output()
-  private tabChange: EventEmitter<SelectedTab> = new EventEmitter();
+  private tabChange: EventEmitter<MediaType> = new EventEmitter();
 
   constructor() {
   }
 
-  change(tab: SelectedTab): void {
-    this.tabChange.emit(tab);
+  change(mediaType: MediaType): void {
+    this.tabChange.emit(mediaType);
   }
 
   onChange() {

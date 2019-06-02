@@ -1,4 +1,4 @@
-import {Injectable, NgModule} from '@angular/core';
+import {Component, Injectable, NgModule} from '@angular/core';
 import {ActivatedRouteSnapshot, Resolve, RouterModule, Routes} from '@angular/router';
 
 import {AboutComponent} from "./features/about/about.component";
@@ -93,6 +93,14 @@ export class MoviesSeriesDetailsResolver implements Resolve<any> {
   }
 }
 
+@Component({
+  template: `
+    <router-outlet></router-outlet>
+  `
+})
+export class EmptyComponent {
+}
+
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
   {
@@ -110,11 +118,21 @@ const routes: Routes = [
     }
   },
   {
-    path: 'details/:mediaType/:id',
-    component: MoviesSeriesDetailsComponent,
-    resolve: {
-      entity: MoviesSeriesDetailsResolver
-    }
+    path: 'movies-series/details',
+    component: EmptyComponent,
+    children: [
+      {
+        path: '',
+        component: MoviesSeriesDetailsComponent
+      },
+      {
+        path: ':mediaType/:id',
+        component: MoviesSeriesDetailsComponent,
+        resolve: {
+          entity: MoviesSeriesDetailsResolver
+        }
+      }
+    ]
   },
   {path: 'about', component: AboutComponent}
 ];

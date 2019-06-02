@@ -19,6 +19,11 @@ export class MediaService {
       .get(`trending/${mediaType}/${timeWindow}?page=${page}`);
   }
 
+  getReviews(mediaType: MediaType = MediaType.MOVIE, id: number, page: number = 1): Observable<any> {
+    return this.http
+      .get(`${mediaType}/${id}/reviews?page=${page}`);
+  }
+
   getMovieById(id: number): Observable<any> {
     return this.http
       .get(`movie/${id}`);

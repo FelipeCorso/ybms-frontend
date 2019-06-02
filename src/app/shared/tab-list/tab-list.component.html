@@ -8,8 +8,8 @@
 </p-tabView>
 
 <ng-template #listItems>
-  <list-movies-series [(items)]="item.results"></list-movies-series>
+  <list-movies-series [mediaType]="activeTabView" [(items)]="item.results"></list-movies-series>
   <p-paginator [rows]="20" *ngIf="item?.results?.length"
-               [totalRecords]="item.total_results"
+               [totalRecords]="item?.total_results"
                (onPageChange)="onPageChange($event)"></p-paginator>
 </ng-template>

@@ -1,3 +1,42 @@
-<p>
-  movies-series-details works!
-</p>
+o Time;
+o Cast (picture and name);
+o Trailers;
+o Top three reviews;
+o Add or Remove favorite.
+
+<div class="ui-g">
+  <div class="ui-g-3" style="justify-content: center; display: flex;">
+    <img style="height: 300px" [src]="'https://image.tmdb.org/t/p/w200' + item?.poster_path" alt="">
+  </div>
+  <div class="ui-g-9">
+    <div style="display: flex; justify-content: space-between">
+      <div class="details-info">
+        <span class="name">{{item?.original_title || item?.original_name}}</span>
+        <span class="release-date">{{item?.release_date | date:'yyyy'}}</span>
+      </div>
+      <div class="details-rating">
+        <strong>Rating:</strong> {{item?.vote_average}}/10
+        <span class="vote-count">Based on {{item?.vote_count}} votes</span>
+        <ng-container *ngFor="let genre of item.genres">
+          <span class="genre">{{genre.name}}</span>
+        </ng-container>
+      </div>
+    </div>
+    <p-tabView (onChange)="onTabChange($event)">
+      <p-tabPanel leftIcon="fa fa-home">
+        <app-details-home [item]="item"></app-details-home>
+      </p-tabPanel>
+      <p-tabPanel header="Trailers">
+      </p-tabPanel>
+      <p-tabPanel header="Cast">
+      </p-tabPanel>
+      <p-tabPanel header="Reviews">
+        <app-details-reviews [item]="item"></app-details-reviews>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>
+
+
+
+

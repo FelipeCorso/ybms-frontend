@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 
 import {AppComponent} from './app.component';
 
-import {AppRoutingModule} from './app-routing.module';
+import {AppRoutingModule, EmptyComponent} from './app-routing.module';
 import {HomeComponent} from "./features/home/home.component";
 import {FavoritesComponent} from "./features/favorites/favorites.component";
 import {ListMoviesSeriesComponent} from "./shared/list-movies-series/list-movies-series.component";
@@ -19,6 +19,8 @@ import { FavoriteComponent } from './shared/favorite/favorite.component';
 import {TableModule} from "primeng/table";
 import { MoviesSeriesDetailsComponent } from './features/movies-series-details/movies-series-details.component';
 import { TopMovieSeriesComponent } from './shared/top-movie-series/top-movie-series.component';
+import { DetailsHomeComponent } from './features/movies-series-details/components/details-home/details-home.component';
+import { DetailsReviewsComponent } from './features/movies-series-details/components/details-reviews/details-reviews.component';
 
 @NgModule({
   imports: [
@@ -35,6 +37,7 @@ import { TopMovieSeriesComponent } from './shared/top-movie-series/top-movie-ser
   declarations: [
     AboutComponent,
     AppComponent,
+    EmptyComponent,
     FavoritesComponent,
     HomeComponent,
     ListMoviesSeriesComponent,
@@ -43,7 +46,9 @@ import { TopMovieSeriesComponent } from './shared/top-movie-series/top-movie-ser
     TabListComponent,
     FavoriteComponent,
     MoviesSeriesDetailsComponent,
-    TopMovieSeriesComponent
+    TopMovieSeriesComponent,
+    DetailsHomeComponent,
+    DetailsReviewsComponent
   ],
   bootstrap: [AppComponent]
 })

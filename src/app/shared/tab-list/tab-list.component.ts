@@ -13,7 +13,7 @@ export class TabListComponent implements OnChanges, OnInit {
 
   @Input() data: MoviesSeriesDto;
 
-  activeTabView: number = SelectedTab.MOVIES;
+  activeTabView: MediaType = MediaType.MOVIE;
   item: MediaTypeDto;
 
   constructor(private mediaService: MediaService, private tabListService: TabListService) {
@@ -31,16 +31,15 @@ export class TabListComponent implements OnChanges, OnInit {
   }
 
   onTabChange(event: any) {
-    this.activeTabView = event.index;
+    this.activeTabView = event.index === 0 ? MediaType.MOVIE : MediaType.SERIE;
     this.tabListService.change(this.activeTabView);
     this.updateItems();
   }
 
   onPageChange($event): void {
-    const mediaType: MediaType = this.activeTabView === 0 ? MediaType.MOVIE : MediaType.SERIE;
-    this.mediaService.getMediaTrending(mediaType, undefined, $event.page + 1)
+    ;this.mediaService.getMediaTrending(this.activeTabView, undefined, $event.page + 1)
       .subscribe((media: MediaTypeDto) => {
-        switch (mediaType) {
+        switch (this.activeTabView) {
           case MediaType.MOVIE:
             this.data.movies = media;
             break;
@@ -58,10 +57,10 @@ export class TabListComponent implements OnChanges, OnInit {
 
   private updateItems(): void {
     switch (this.activeTabView) {
-      case SelectedTab.MOVIES:
+      case MediaType.MOVIE:
         this.item = this.data.movies;
         break;
-      case SelectedTab.SERIES:
+      case MediaType.SERIE:
         this.item = this.data.series;
         break;
     }
