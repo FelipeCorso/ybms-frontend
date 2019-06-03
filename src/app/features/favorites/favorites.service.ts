@@ -45,7 +45,7 @@ export class FavoritesService {
     }
     switch (mediaType) {
       case MediaType.MOVIE:
-        this.addRemoveItem(ybmsFavorites.movies.results, operation, item);
+        ybmsFavorites.movies.results = this.addRemoveItem(ybmsFavorites.movies.results, operation, item);
         break;
       case MediaType.SERIE:
         ybmsFavorites.series.results = this.addRemoveItem(ybmsFavorites.series.results, operation, item);

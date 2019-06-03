@@ -6,6 +6,11 @@ import {Component} from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'YBMs | project\n';
+  sidebarInactive = true;
+  title = 'YBMs';
   subTitle = '(Your beloved movies and series)';
+
+  hideSidebar(): void {
+    this.sidebarInactive = true;
+  }
 }

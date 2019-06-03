@@ -1,10 +1,29 @@
-<h1>{{title}}</h1>
-<h6 style="margin-top: 0">{{subTitle}}</h6>
-<nav>
-  <a routerLink="/home">Home</a>
-  <a routerLink="/favorites">Favorites</a>
-  <!--<a routerLink="/movies-series/details">Movies/Series</a>-->
-  <a routerLink="/about">About</a>
-</nav>
-<router-outlet></router-outlet>
-<sidebar-item></sidebar-item>
+<div [ngClass]="{'sidebar-inactive': sidebarInactive}">
+  <div class="topbar">
+    <i class="fa fa-bars" (click)="sidebarInactive = !sidebarInactive"></i>
+    <span class="title">{{title}} | </span>
+    <span class="subtitle">{{subTitle}}</span>
+  </div>
+  <div class="sidebar">
+    <ul>
+      <li>
+        <a (click)="hideSidebar()" routerLink="/home">Home</a>
+      </li>
+      <li>
+        <a (click)="hideSidebar()" routerLink="/favorites">Favorites</a>
+      </li>
+      <!--<li>-->
+      <!--<a routerLink="/movies-series/details">Movies/Series</a>-->
+      <!--</li>-->
+      <li>
+        <a (click)="hideSidebar()" routerLink="/about">About</a>
+      </li>
+    </ul>
+  </div>
+  <div class="main">
+    <router-outlet></router-outlet>
+  </div>
+
+  <sidebar-item></sidebar-item>
+</div>
+

@@ -12,8 +12,8 @@
       <div class="details-rating">
         {{item?.vote_average}}<i class="fa fa-star" style="margin-right: 5px"></i>
         <span class="vote-count">Based on {{item?.vote_count}} votes</span>
-        <ng-container *ngFor="let genre of item.genres">
-          <span class="genre">{{genre.name}}</span>
+        <ng-container *ngFor="let genre of item.genres; let $last = last;">
+          <span class="genre">{{genre.name}}{{!$last ? ';' : ''}}</span>
         </ng-container>
       </div>
     </div>
