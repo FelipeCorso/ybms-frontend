@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MovieSerieDto} from '../../../../core/entities/movie-serie-dto';
 import {SidebarService} from '../../../sidebar/sidebar.service';
+import {Router} from "@angular/router";
+import {MediaType} from "../../../../core/enums/media-type";
 
 @Component({
   selector: 'list-item',
@@ -9,8 +11,9 @@ import {SidebarService} from '../../../sidebar/sidebar.service';
 })
 export class ListItemComponent implements OnInit {
   @Input() item: MovieSerieDto;
+  @Input() mediaType: MediaType;
 
-  constructor(private sidebarService: SidebarService) {
+  constructor(private router: Router, private sidebarService: SidebarService) {
   }
 
   ngOnInit() {
@@ -20,8 +23,8 @@ export class ListItemComponent implements OnInit {
     this.sidebarService.show(this.item);
   }
 
-  onClickFavorite(): void {
-    this.item.favorite = !this.item.favorite;
-  }
+  onClickDetails(): void {
+    this.router.navigate([`movies-series/details/${this.mediaType}/${this.item.id}`]);
 
+  }
 }

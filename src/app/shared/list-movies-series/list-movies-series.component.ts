@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MovieSerieDto} from "../../core/entities/movie-serie-dto";
+import {MediaType} from "../../core/enums/media-type";
 
 @Component({
   selector: 'list-movies-series',
@@ -8,6 +9,7 @@ import {MovieSerieDto} from "../../core/entities/movie-serie-dto";
 })
 export class ListMoviesSeriesComponent implements OnInit {
   @Input() items: MovieSerieDto[] = [];
+  @Input() mediaType: MediaType;
 
   constructor() {
   }

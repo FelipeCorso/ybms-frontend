@@ -1,0 +1,108 @@
+/* AppComponent's private CSS styles */
+h1 {
+  font-size: 1.2em;
+  color: #999;
+  margin-bottom: 0;
+}
+
+h2 {
+  font-size: 2em;
+  margin-top: 0;
+  padding-top: 0;
+}
+
+nav a {
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #eee;
+  border-radius: 4px;
+}
+
+nav a:visited, a:link {
+  color: #607d8b;
+}
+
+nav a:hover {
+  color: #039be5;
+  background-color: #cfd8dc;
+}
+
+nav a.active {
+  color: #039be5;
+}
+
+.sidebar-inactive {
+  .topbar {
+    left: 0;
+  }
+
+  .sidebar {
+    left: -250px;
+  }
+
+  .main {
+    margin-left: 0;
+  }
+}
+
+.topbar {
+  transition: left .3s;
+  position: fixed;
+  right: 0;
+  left: 250px;
+  height: 50px;
+  background-color: #0388e5;
+  padding: .7em 1.5em 0;
+  box-sizing: border-box;
+  color: #fff;
+  z-index: 101;
+  top: 0;
+  display: flex;
+  align-items: baseline;
+
+  i {
+    font-size: 20px;
+  }
+
+  .title {
+    padding: 0 10px;
+  }
+  .subtitle {
+    font-size: 12px;
+  }
+}
+
+.sidebar {
+  background: linear-gradient(to bottom, #4e5159 0, #1f2023 100%);
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  z-index: 102;
+  transition: margin-left .3s;
+  top: 0;
+
+  ul {
+    list-style-type: none;
+    li {
+      a {
+        position: relative;
+        color: #fff;
+        text-decoration: none;
+        font-size: 14px;
+        padding: 15px;
+        display: block;
+        box-sizing: border-box;
+        border-top: 1px solid #4e5159;
+        transition: padding-left .3s;
+      }
+    }
+  }
+}
+
+.main {
+  transition: margin-left .3s;
+  margin-left: 250px;
+  padding: 50px 16px 16px;
+}

@@ -1,14 +1,17 @@
-<p-tabView (onChange)="onTabChange($event)" [activeIndex]="activeTabView">
+<p-tabView (onChange)="onTabChange($event)">
   <p-tabPanel header="Movies">
-    Content 1
     <ng-container [ngTemplateOutlet]="listItems"></ng-container>
   </p-tabPanel>
   <p-tabPanel header="Series">
-    Content 2
     <ng-container [ngTemplateOutlet]="listItems"></ng-container>
   </p-tabPanel>
 </p-tabView>
 
 <ng-template #listItems>
-  <list-movies-series [items]="items"></list-movies-series>
+  <p-dropdown [options]="filters" [(ngModel)]="selectedFilter" placeholder="Filter by"
+              (onChange)="onFilterChange($event)"></p-dropdown>
+  <list-movies-series [mediaType]="activeTabView" [(items)]="item.results"></list-movies-series>
+  <p-paginator [rows]="20" *ngIf="item?.results?.length"
+               [totalRecords]="item?.total_results"
+               (onPageChange)="onPageChange($event)"></p-paginator>
 </ng-template>

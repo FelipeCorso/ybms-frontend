@@ -1,3 +1,12 @@
 <p-sidebar [(visible)]="display" (onHide)="onHide()"
+           styleClass="ui-sidebar-md"
            [modal]="true" position="right" appendTo="body">
+
+  <h1>{{item?.original_title || item?.original_name}}</h1>
+
+  <strong>Description:</strong>
+  <p>{{item?.overview | slice:0:130}}...</p>
+  <i class="fa fa-star" style="margin-right: 5px"></i>{{item?.vote_average}}
+  <br>
+  <app-favorite [item]="item"></app-favorite>
 </p-sidebar>

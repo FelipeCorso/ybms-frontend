@@ -1,0 +1,16 @@
+.top-movie-series {
+  cursor: pointer;
+  height: 300px;
+  background-repeat: no-repeat;
+  background-size: 500px 300px;
+  background-position: center;
+
+  .title {
+    display: block;
+    font-size: 20px;
+    font-weight: bold;
+    color: #FFF;
+    padding-top: 15px;
+    margin-left: 20%;
+  }
+}

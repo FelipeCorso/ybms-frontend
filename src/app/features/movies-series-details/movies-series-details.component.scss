@@ -1,0 +1,23 @@
+.details-info {
+  .name {
+    font-size: 20px;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  .release-date {
+    font-size: 12px;
+  }
+}
+
+.details-rating {
+  direction: rtl;
+  
+  .vote-count {
+    display: block;
+    font-size: 10px;
+  }
+  .genre {
+    font-size: 14px;
+    padding-left: 10px;
+  }
+}

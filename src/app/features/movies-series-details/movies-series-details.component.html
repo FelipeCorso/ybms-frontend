@@ -1,0 +1,39 @@
+<div class="ui-g">
+  <div class="ui-g-3" style="justify-content: center; display: flex;">
+    <img style="height: 300px" [src]="'https://image.tmdb.org/t/p/w200' + item?.poster_path" alt="">
+  </div>
+  <div class="ui-g-9">
+    <div style="display: flex; justify-content: space-between">
+      <div class="details-info">
+        <span class="name">{{item?.original_title || item?.original_name}}</span>
+        <span class="release-date">{{item?.release_date | date:'yyyy'}}</span>
+        <app-favorite style="display: block;" [item]="item"></app-favorite>
+      </div>
+      <div class="details-rating">
+        {{item?.vote_average}}<i class="fa fa-star" style="margin-right: 5px"></i>
+        <span class="vote-count">Based on {{item?.vote_count}} votes</span>
+        <ng-container *ngFor="let genre of item.genres; let $last = last;">
+          <span class="genre">{{genre.name}}{{!$last ? ';' : ''}}</span>
+        </ng-container>
+      </div>
+    </div>
+    <p-tabView (onChange)="onTabChange($event)">
+      <p-tabPanel leftIcon="fa fa-home">
+        <app-details-home [item]="item"></app-details-home>
+      </p-tabPanel>
+      <p-tabPanel header="Trailers">
+        <app-details-trailers [item]="item"></app-details-trailers>
+      </p-tabPanel>
+      <p-tabPanel header="Cast">
+        <app-details-cast [item]="item"></app-details-cast>
+      </p-tabPanel>
+      <p-tabPanel header="Reviews">
+        <app-details-reviews [item]="item"></app-details-reviews>
+      </p-tabPanel>
+    </p-tabView>
+  </div>
+</div>
+
+
+
+

@@ -1,0 +1,12 @@
+<div style="padding: 5px 0">
+  <ng-template [ngIf]="item?.runtime" style="margin-bottom: 50px">
+    <strong>Runtime:</strong> {{getRuntime()}}
+  </ng-template>
+  <div style="margin-top: 10px">
+    <strong>Overview:</strong>
+    <p>
+      {{item?.overview}}
+    </p>
+  </div>
+
+</div>
